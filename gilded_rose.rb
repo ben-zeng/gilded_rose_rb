@@ -8,12 +8,17 @@ class GildedRose
     @items.each do |item|
 
       if item.name == "Backstage passes to a TAFKAL80ETC concert"
+
         if is_sell_in_under_11(item)
-          quality_increase_by_1(item) if is_quality_max(item)
+          quality_increase_by_1(item) if is_quality_not_max(item)
         end
         if is_sell_in_under_6(item)
-          quality_increase_by_1(item) if is_quality_max(item)
+          quality_increase_by_1(item) if is_quality_not_max(item)
         end
+      end
+
+      if item.name != "Sulfuras, Hand of Ragnaros"
+        sell_in_reduce_by_1(item)
       end
 
 
@@ -25,16 +30,13 @@ class GildedRose
         end
 
       else
-        if is_quality_max(item)
+        if is_quality_not_max(item)
           quality_increase_by_1(item)
-
         end
       end
 
 
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        sell_in_reduce_by_1(item)
-      end
+
 
       if item.sell_in < 0
         if item.name != "Aged Brie"
@@ -48,7 +50,7 @@ class GildedRose
             quality_set_to_0(item)
           end
         else
-          quality_increase_by_1(item) if is_quality_max(item)
+          quality_increase_by_1(item) if is_quality_not_max(item)
         end
       end
     end
@@ -66,7 +68,7 @@ class GildedRose
     item.quality = 0
   end
 
-  def is_quality_max(item)
+  def is_quality_not_max(item)
     item.quality < 50
   end
 
