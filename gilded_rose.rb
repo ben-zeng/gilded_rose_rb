@@ -18,15 +18,11 @@ class GildedRose
         if is_quality_max(item)
           quality_increase_by_1(item)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-
+            if is_sell_in_under_11(item)
               quality_increase_by_1(item) if is_quality_max(item)
-
             end
-            if item.sell_in < 6
-
+            if is_sell_in_under_6(item)
               quality_increase_by_1(item) if is_quality_max(item)
-
             end
           end
         end
@@ -74,6 +70,16 @@ class GildedRose
   def is_quality_above_min(item)
     item.quality > 0
   end
+
+  def is_sell_in_under_11(item)
+    item.sell_in < 11
+  end
+
+  def is_sell_in_under_6(item)
+    item.sell_in < 6
+  end
+
+
 
 
 
