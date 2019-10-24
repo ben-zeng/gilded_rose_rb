@@ -8,13 +8,9 @@ class GildedRose
     @items.each do |item|
 
       if item.name == "Backstage passes to a TAFKAL80ETC concert"
+          quality_increase_by_1(item) if is_sell_in_under_11(item) && is_quality_not_max(item)
+          quality_increase_by_1(item) if is_sell_in_under_6(item) && is_quality_not_max(item)
 
-        if is_sell_in_under_11(item)
-          quality_increase_by_1(item) if is_quality_not_max(item)
-        end
-        if is_sell_in_under_6(item)
-          quality_increase_by_1(item) if is_quality_not_max(item)
-        end
       end
 
       if item.name != "Sulfuras, Hand of Ragnaros"
