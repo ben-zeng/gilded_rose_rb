@@ -12,6 +12,9 @@ class GildedRose
         quality_increase_by_1(item) if is_sell_in_under_6(item) && is_quality_not_max(item)
         quality_increase_by_1(item) if is_quality_not_max(item)
         quality_set_to_0(item) if is_sell_in_equal_0(item)
+      elsif item.name == "Aged Brie"
+        quality_increase_by_1(item) if is_quality_not_max(item)
+
       end
 
       if item.name != "Sulfuras, Hand of Ragnaros"
@@ -25,9 +28,6 @@ class GildedRose
           end
         end
 
-      else
-
-          quality_increase_by_1(item) if is_quality_not_max(item) && item.name == "Aged Brie"
 
       end
 
