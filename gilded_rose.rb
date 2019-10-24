@@ -17,15 +17,11 @@ class GildedRose
 
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         p "in sulfuras"
-
       else
         sell_in_reduce_by_1(item)
         quality_reduce_by_1(item) if is_quality_above_min(item)
 
-
       end
-
-
 
 
       if item.sell_in < 0
@@ -36,8 +32,7 @@ class GildedRose
                  quality_reduce_by_1(item)
               end
             end
-          else
-            quality_set_to_0(item)
+
           end
 
         end
