@@ -20,21 +20,12 @@ class GildedRose
 
       else
         sell_in_reduce_by_1(item)
-
+        quality_reduce_by_1(item) if is_quality_above_min(item)
 
 
       end
 
 
-      if item.name != "Aged Brie" && item.name != "Backstage passes to a TAFKAL80ETC concert"
-
-        if is_quality_above_min(item)
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            quality_reduce_by_1(item)
-          end
-        end
-
-      end
 
 
       if item.sell_in < 0
