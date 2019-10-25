@@ -98,16 +98,17 @@ describe GildedRose do
       end
 
       it 'when sell_in is 0, ' do
-        items = [Item.new("Conjured item", 0, 3)]
+        items = [Item.new("Conjured item", 0, 4)]
         GildedRose.new(items).update_quality
-        expect(items[0].quality).to eq -1
+        expect(items[0].quality).to eq 0
       end
 
       it 'when sell_in below 0, ' do
-        items = [Item.new("Conjured item", 2, 3)]
+        items = [Item.new("Conjured item", -2, 8)]
         GildedRose.new(items).update_quality
-        expect(items[0].quality).to eq -1
+        expect(items[0].quality).to eq 4
       end
+
     end
 
   end

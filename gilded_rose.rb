@@ -12,13 +12,15 @@ class GildedRose
         quality_increase_by_1(item)
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         p "Sulfuras is legendary, nothing happens to it"
+      elsif item.name == "Conjured item"
+        item.sell_in -= 1
+        2.times { update_quality_normal_items(item) }
       else
         item.sell_in -= 1
         update_quality_normal_items(item)
       end
     end
   end
-
 
   def update_quality_backstage_pass(item)
     if item.sell_in > 10
