@@ -59,14 +59,6 @@ class GildedRose
   def sell_in_reduce_by_1(item)
     item.sell_in -= 1
   end
-
-
-
-
-
-
-
-
 end
 
 class Item
