@@ -7,29 +7,35 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if item.name == "Backstage passes to a TAFKAL80ETC concert"
-        quality_increase_by_1(item) if is_sell_in_under_11(item) && is_quality_not_max(item)
-        quality_increase_by_1(item) if is_sell_in_under_6(item) && is_quality_not_max(item)
-        quality_increase_by_1(item) if is_quality_not_max(item)
+        quality_increase_by_1(item) if is_sell_in_under_11(item)
+        quality_increase_by_1(item) if is_sell_in_under_6(item)
+        quality_increase_by_1(item)
         quality_set_to_0(item) if is_sell_in_equal_0(item)
       elsif item.name == "Aged Brie"
-        quality_increase_by_1(item) if is_quality_not_max(item)
+        quality_increase_by_1(item)
 
       elsif item.name == "Sulfuras, Hand of Ragnaros"
         p "in sulfuras"
       else
         sell_in_reduce_by_1(item)
-        quality_reduce_by_1(item) if is_quality_above_min(item)
-        quality_reduce_by_1(item) if is_quality_above_min(item) && item.sell_in < 0
+        quality_reduce_by_1(item)
+        quality_reduce_by_1(item) if item.sell_in < 0
       end
     end
   end
 
+
+
   def quality_increase_by_1(item)
-    item.quality += 1
+    item.quality += 1 if is_quality_not_max(item)
   end
 
   def quality_reduce_by_1(item)
-    item.quality -= 1
+    item.quality -= 1 if is_quality_above_min(item)
+  end
+
+  def quality_reduce_by_2(item)
+    item.quality -= 2 if is_quality_above_min(item)
   end
 
   def quality_set_to_0(item)
