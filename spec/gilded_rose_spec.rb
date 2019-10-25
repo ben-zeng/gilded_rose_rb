@@ -89,6 +89,27 @@ describe GildedRose do
         expect(items[0].quality).to eq 1
       end
     end
+
+    describe 'for Conjured items, quality reduces twice as fast' do
+      it 'when sell_in above 0' do
+        items = [Item.new("Conjured item", 2, 3)]
+        GildedRose.new(items).update_quality
+        expect(items[0].quality).to eq 1
+      end
+
+      it 'when sell_in is 0, ' do
+        items = [Item.new("Conjured item", 0, 3)]
+        GildedRose.new(items).update_quality
+        expect(items[0].quality).to eq -1
+      end
+
+      it 'when sell_in below 0, ' do
+        items = [Item.new("Conjured item", 2, 3)]
+        GildedRose.new(items).update_quality
+        expect(items[0].quality).to eq -1
+      end
+    end
+
   end
 
 

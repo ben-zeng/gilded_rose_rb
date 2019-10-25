@@ -14,10 +14,11 @@ class GildedRose
         p "Sulfuras is legendary, nothing happens to it"
       else
         item.sell_in -= 1
-        item.sell_in < 0 ? 2.times {quality_reduce_by_1(item)} : quality_reduce_by_1(item)
+        update_quality_normal_items(item)
       end
     end
   end
+
 
   def update_quality_backstage_pass(item)
     if item.sell_in > 10
@@ -29,6 +30,10 @@ class GildedRose
     else
       item.quality = 0
     end
+  end
+
+  def update_quality_normal_items(item)
+    item.sell_in < 0 ? 2.times { quality_reduce_by_1(item) } : quality_reduce_by_1(item)
   end
 
   def quality_increase_by_1(item)
