@@ -7,24 +7,29 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       if item.name == "Backstage passes to a TAFKAL80ETC concert"
-        quality_increase_by_1(item) if is_sell_in_under_11(item)
-        quality_increase_by_1(item) if is_sell_in_under_6(item)
-        quality_increase_by_1(item)
-        quality_set_to_0(item) if is_sell_in_equal_0(item)
+        update_quality_backstage_pass(item)
       elsif item.name == "Aged Brie"
         quality_increase_by_1(item)
-
       elsif item.name == "Sulfuras, Hand of Ragnaros"
-        p "in sulfuras"
+        p "Sulfuras is legendary, nothing happens to it"
       else
-        sell_in_reduce_by_1(item)
-        quality_reduce_by_1(item)
-        quality_reduce_by_1(item) if item.sell_in < 0
+        item.sell_in -= 1
+        item.sell_in < 0 ? 2.times {quality_reduce_by_1(item)} : quality_reduce_by_1(item)
       end
     end
   end
 
-
+  def update_quality_backstage_pass(item)
+    if item.sell_in > 10
+      quality_increase_by_1(item)
+    elsif item.sell_in.between?(6,10)
+      2.times { quality_increase_by_1(item) }
+    elsif item.sell_in.between?(1,5)
+      3.times { quality_increase_by_1(item) }
+    else
+      item.quality = 0
+    end
+  end
 
   def quality_increase_by_1(item)
     item.quality += 1 if is_quality_not_max(item)
@@ -32,14 +37,6 @@ class GildedRose
 
   def quality_reduce_by_1(item)
     item.quality -= 1 if is_quality_above_min(item)
-  end
-
-  def quality_reduce_by_2(item)
-    item.quality -= 2 if is_quality_above_min(item)
-  end
-
-  def quality_set_to_0(item)
-    item.quality = 0
   end
 
   def is_quality_not_max(item)
@@ -50,21 +47,7 @@ class GildedRose
     item.quality > 0
   end
 
-  def is_sell_in_under_11(item)
-    item.sell_in < 11
-  end
 
-  def is_sell_in_under_6(item)
-    item.sell_in < 6
-  end
-
-  def is_sell_in_equal_0(item)
-    item.sell_in == 0
-  end
-
-  def sell_in_reduce_by_1(item)
-    item.sell_in -= 1
-  end
 end
 
 class Item
